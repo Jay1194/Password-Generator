@@ -2,7 +2,7 @@
   //Password contents
   let lowerC ="abcdefghijklmnopqrstuvwxyz";
   let numEric = "0123456789";
-  let upperC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let upperC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   let special ="!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   let starT = '';
   let charLength = 0;
@@ -30,7 +30,7 @@ let  generatePassword = function(){
   
 
   var passwordLength = function()  {
-    var charLength = prompt("choose a length of at least 8 characters and no more than 128 characters.");
+     charLength = prompt("choose a length of at least 8 characters and no more than 128 characters.");
     console.log(charLength);
   
     if (charLength < 8 || charLength > 128) {
@@ -80,16 +80,16 @@ let  generatePassword = function(){
          }
         
         
-        
+       
 
   //For every character less than the desired password length, add another character from the available createdPassword string
   let passwordFinal = "";
   for (let i = 0; i < parseInt(charLength); i++) {
-    passwordFinal += createPassword[Math.floor(Math.random() * createPassword.length)]
+    passwordFinal += createPassword[Math.floor(Math.random() * parseInt(charLength.length))]
   }
-
+console.log(charLength) 
   //Returns the generated password
-  return createPassword;
+  return passwordFinal;
   };
  
   // Assignment Code Targets 
@@ -101,7 +101,8 @@ let  generatePassword = function(){
     var passwordText = document.querySelector("#password");
     passwordText.value = password;
   }
+  writePassword();
    //Add event listener to generate button
   generateBtn.addEventListener("click", writePassword);
   
-   writePassword();
+   
