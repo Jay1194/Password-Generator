@@ -1,121 +1,107 @@
 
-// global variables (turn into array)
-var  confirmP = {
-confirmLowerC: true || false, 
-confirmNumEric: true || false,
-confirmUpperC: true || false,
-confirmSpecial: true || false
-}
+  //Password contents
+  let lowerC ="abcdefghijklmnopqrstuvwxyz";
+  let numEric = "0123456789";
+  let upperC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let special ="!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  let starT = '';
+  let charLength = 0;
 
+//Empty string assigned for createdPassword so that characters can be inserted based on selectors chosen through confirm boxes
+let createPassword = "";
 
-var passwordCriteria = {
-  lowerC: "a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z",
-  numEric: "0, 1, 2, 3, 4, 5, 6, 7, 8, 9",
-  upperC: "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P",
-  special: "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-}
+// password criteria confirm
+let confirmLowerC = '';
+let confirmNumEric = '';
+let confirmUpperC = '';
+let confirmSpecial = '';
 
+let  generatePassword = function(){
 
-// To begin
-var promptMe = function() {
-  var startBtn = confirm("would you like to generate a password?");
-  console.log(startBtn);
-
-  if (startBtn == false) {
-    return promptMe();
+  let start = function() {
+    var startBtn = confirm("would you like to generate a password?");
+    console.log(startBtn);
+  
+    if (startBtn == false) {
+      return start();
+    }
   }
-};
-
-
-  // function chose pasword character's length
-var passwordLength = function()  {
-  var characterLength = prompt("choose a length of at least 8 characters and no more than 128 characters.");
-  console.log(characterLength);
-
-  if (characterLength < 8 || characterLength > 128) {
-    window.alert("You must choose a pasword length of at least 8 characters and no more than 128 characters! Please try again.");
-    return passwordLength();
-  }
-};
-
-
-// function for password criteria
-  var passwordQuestions = function() {
+ start();
   
 
-  // Password criteria prompt
-       alert("Please choose at least one of the following passwword criteria options!")
-
-       confirmP.confirmLowerC = confirm("Would you like to include lowercase characters in your password?");
-       console.log(confirmP.confirmLowerC);
-    
-       confirmP.confirmNumEric = confirm("Would you like to include numbers in your password?");
-       console.log(confirmP.confirmNumEric)
-   
-       confirmP.confirmUpperC = confirm("Would you like to include uppercase characters in your password?");
-       console.log(confirmP.confirmUpperC);
-
-       confirmP.confirmSpecial = confirm("Would you like to include special characters in your password?");
-       console.log(confirmP.confirmSpecial);
-
-
-    //If everything false return to top passwordQuestions() function and start again
-    if (Object.values(confirmP).every(item => item === false)) {
-      alert("Choose at least one of the password options!")
-      return passwordQuestions();
+  var passwordLength = function()  {
+    var charLength = prompt("choose a length of at least 8 characters and no more than 128 characters.");
+    console.log(charLength);
+  
+    if (charLength < 8 || charLength > 128) {
+      window.alert("You must choose a pasword length of at least 8 characters and no more than 128 characters! Please try again.");
+      return passwordLength();
     }
-};
+  };
+  passwordLength();
+  
 
 
+    
+  
+    // Password criteria prompt
+  let criTeria = function () {
+         alert("Please choose at least one of the following passwword criteria options!")
+  
 
+         confirmLowerC = confirm("Would you like to include lowercase characters in your password?");
+         if (confirmLowerC) {
+          createPassword += lowerC}
+         };
+      
+         confirmNumEric = confirm("Would you like to include numbers in your password?");
+         if (confirmNumEric) {
+          createPassword += numEric
+         };
+         
+     
+         confirmUpperC = confirm("Would you like to include uppercase characters in your password?");
+         if (confirmUpperC) {
+          createPassword += upperC
+         };
+         
+  
+         confirmSpecial = confirm("Would you like to include special characters in your password?");
+         if (confirmSpecial) {
+          createPassword += special
+         };
+         
+  
+  
+         //If everything false return to top passwordQuestions() function and start again
+         if (!confirmLowerC && !confirmNumEric && !confirmUpperC && !confirmSpecial) {
+           alert("Choose at least one of the password options!");
+           return criTeria();
+         }
+        
+        
+        
 
-promptMe();
-passwordLength();
-passwordQuestions();
+  //For every character less than the desired password length, add another character from the available createdPassword string
+  let passwordFinal = "";
+  for (let i = 0; i < parseInt(charLength); i++) {
+    passwordFinal += createPassword[Math.floor(Math.random() * createPassword.length)]
+  }
 
+  //Returns the generated password
+  return createPassword;
+  };
+ 
+  // Assignment Code Targets 
+  var generateBtn = document.querySelector("#generate");
 
-  // randomize password baised off criteria selected
-
-
-
-  // display password in box
-
-
-
-
-
-//password criteria object, If question true randomize the answer from this object basied of user put criteria 
-// Make array?
-// make for loop to loop through array basied on conditions
-
-
-
-
-
-
-
-
-/*
-// Assignment Code Targets 
-var generateBtn = document.querySelector("#generate");
-
-
-
-
-// Write password to the #password input 
-function writePassword() {
-  var password = generatePassword();
-
-  // targets password box
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-// prints password
-document.getElementById("password").innerHTML = writePassword;
-*/
+  // Write password to the #password input 
+  function writePassword() {
+    let password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
+   //Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
+  
+   writePassword();
