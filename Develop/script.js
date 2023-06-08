@@ -26,6 +26,7 @@ var generatePassword = function () {
   };
   start();
 
+  // Password length prompt
   var passwordLength = function () {
     charLength = prompt(
       "Choose a length of at least 8 characters and no more than 128 characters."
