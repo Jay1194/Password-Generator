@@ -73,7 +73,7 @@ var generatePassword = function () {
   };
   criteria();
 
-  //For every character less than the desired password length
+    //For every character less than the desired password length
   let passwordFinal = "";
   for (let i = 0; i < parseInt(charLength); i++) {
     passwordFinal += createPassword[Math.floor(Math.random() * createPassword.length)];
