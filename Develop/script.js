@@ -79,7 +79,7 @@ var generatePassword = function () {
     passwordFinal += createPassword[Math.floor(Math.random() * createPassword.length)];
   }
 
-  //Returns the generated password
+   //Returns the generated password
   return passwordFinal;
 };
 
